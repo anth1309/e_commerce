@@ -18,36 +18,42 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder //construction des champs du formulaire
+        $builder //construction des champs du formulaire attr.. permet la mise en form label la syntax
             ->add('email' , EmailType::class,[
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'label' => 'Courriel'
             ])
             ->add('lastname' , TextType::class,[
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'label' => 'Nom'
             ])
             ->add('firstname' , TextType::class,[
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'label' => 'Prénom'
             ])
             ->add('address', TextType::class,[
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'label' => 'Adresse'
             ])
             ->add('zipcode' , TextType::class,[
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'label' => 'Code Postal'
             ])
             ->add('city' , TextType::class,[
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'label' => 'Ville'
             ])
             ->add('RGPDConsent', CheckboxType::class, [
                 'mapped' => false,
@@ -55,7 +61,7 @@ class RegistrationFormType extends AbstractType
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
-                ],
+                ],'label' => 'J’accepte que la société TonyDesign me propose par courriel de nouveaux produits ou services.',
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -64,6 +70,8 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password',
                 'class' => 'form-control'
             ],
+            
+
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -75,6 +83,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+               
             ])
         ;
     }

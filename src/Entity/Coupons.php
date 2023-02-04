@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Entity;
+// use App\Entity\Trait\CreatedAtTrait;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\CouponsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CouponsRepository::class)]
 class Coupons
 {
+    //fait ref a CreatedAtTrait
+    use CreatedAtTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -28,19 +32,15 @@ class Coupons
     #[ORM\Column]
     private ?int $max_usage = null;
 
-    
-
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $validity = null;
 
     #[ORM\Column]
     private ?bool $is_valid = null;
 
-    #[ORM\Column(type: 'datetime_immutable', options: ['default' =>
-    'CURRENT_TIMESTAMP']) ]
-    private  $created_at = null;
-
+    // #[ORM\Column(type: 'datetime_immutable', options: ['default' =>
+    // 'CURRENT_TIMESTAMP'])]
+    // private  $created_at = null;
     // #[ORM\Column]
     // private ?\DateTimeImmutable $created_at = null;
 
@@ -54,6 +54,7 @@ class Coupons
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -133,17 +134,20 @@ class Coupons
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
 
-        return $this;
-    }
+
+    // public function getCreatedAt(): ?\DateTimeImmutable
+    // {
+    //     return $this->created_at;
+    // }
+
+    // public function setCreatedAt(\DateTimeImmutable $created_at): self
+    // {
+    //     $this->created_at = $created_at;
+
+    //     return $this;
+    // }
 
     public function getCouponsTypes(): ?CouponsTypes
     {

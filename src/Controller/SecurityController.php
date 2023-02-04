@@ -13,9 +13,9 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         //permet de renvoyer l user sur son compte si retente de se logger
-         if ($this->getUser()) {
-             return $this->redirectToRoute('target_path');
-         }
+         //if ($this->getUser()) {
+           //  return $this->redirectToRoute('app_login');
+        // }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -27,7 +27,7 @@ class SecurityController extends AbstractController
             'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/déconnexion', name: 'app_logout')]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
