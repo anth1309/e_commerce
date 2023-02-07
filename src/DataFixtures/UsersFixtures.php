@@ -25,6 +25,7 @@ class UsersFixtures extends Fixture
         $admin->setFirstname('Anthony');
         $admin->setAddress('39 chemin de Crillon');
         $admin->setZipcode('84330');
+        $admin->setResetToken("kyhgkhfk557");
         $admin->setCity('Caromb');
         $admin->setPassword(
             $this->passwordEncoder->hashPassword($admin, 'azerty')
@@ -39,6 +40,7 @@ class UsersFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setLastname($faker->lastName);
             $user->setFirstname($faker->firstName);
+            $user->setResetToken("kyhgkhfk557");
             $user->setAddress($faker->streetAddress);
             $user->setZipcode(str_replace(' ', '', $faker->postcode)); //genere des code5caract plus espace dc trop lg passe methode pour supp espace
             $user->setCity($faker->city);

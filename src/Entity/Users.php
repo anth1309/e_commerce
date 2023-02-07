@@ -50,6 +50,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 128)]
     private ?string $city = null;
 
+    //stock le reset token (le jeton d enregistrement)
+    #[ORM\Column(type: 'string', length: 128)]
+    private $resetToken;
+    //propriete privé donc accesseur
+
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
     private Collection $orders;
 
@@ -78,6 +83,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
 
     /**
      * A visual identifier that represents this user.
@@ -192,6 +199,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getResetToken(): ?string //renvois une chaine de caractere ou pas
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+        return $this;
+    }
+
+    //@return Collection/Orders[]
     /**
      * @return Collection<int, Orders>
      */
