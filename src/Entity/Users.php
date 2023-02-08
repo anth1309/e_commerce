@@ -55,6 +55,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private $resetToken;
     //propriete privé donc accesseur
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_verified = false;
+
+
+
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
     private Collection $orders;
 
@@ -64,8 +69,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->created_at = new \DateTimeImmutable();
     }
 
-    // #[ORM\Column]
-    // private ?\DateTimeImmutable $created_at = null;
+
 
     public function getId(): ?int
     {
@@ -237,6 +241,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIs_Verified(): ?bool //retourne un booléen
+    {
+        return $this->is_verified;
+    }
+
+    public function setIs_Verified(bool $is_verified): self //retourne lui meme
+    {
+        $this->is_verified = $is_verified;
 
         return $this;
     }

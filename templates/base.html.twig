@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Acceuil{% endblock %}- Site e-commerce</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Acceuil
+			{% endblock %}- Site e-commerce</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {# commun a toute les pages feuilles de styles fct asset va chercher ds doss public#}
-    <link rel="stylesheet" href=" {{asset('assets/css/bootstrap.min.css')}} ">
-    {% block stylesheets %} {% endblock %}
-    <link rel="stylesheet" href=" {{asset('assets/css/styles.css')}} ">
-
-
-    {# commun a toute les pages fichier js#}
-    <script src=" {{asset('assets/js/bootstrap.bundle.min.js')}} " defer></script> {#defer permet d attendre que le Dom
-    soit charger#}
-    {% block javascripts %} {% endblock %}
-    <script src=" {{asset('assets/js/scripts.js')}} " defer></script>
+		{# commun a toute les pages feuilles de styles fct asset va chercher ds doss public#}
+		<link rel="stylesheet" href=" {{asset('assets/css/bootstrap.min.css')}} "> {% block stylesheets %}{% endblock %}
+		<link
+		rel="stylesheet" href=" {{asset('assets/css/styles.css')}} ">
 
 
-</head>
+		{# commun a toute les pages fichier js#}
+		<script src=" {{asset('assets/js/bootstrap.bundle.min.js')}} " defer></script>
+		{#defer permet d attendre que le Dom
+																										    soit charger#}
+		{% block javascripts %}{% endblock %}
+		<script src=" {{asset('assets/js/scripts.js')}} " defer></script>
 
-<body>
-    {% include "_partials/_nav.html.twig" %}
 
-    {% block body %}{% endblock %}
+	</head>
 
-    {% include "_partials/_footer.html.twig" %}
+	<body>
+		{% include "_partials/_nav.html.twig" %}
 
-</body>
+		{% if app.user  and app.user.is_Verified == false %}
+			<div class="alert alert-warning alert-dismissible" role="alert">
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+				<div class="alert-message">
+					<strong>
+						Votre compte est inactif</strong>,
+					<a href='{{path('resend_verif')}}'>
+						Renvoyé le lien d activation</a>
+				</div>
+			</div>
+		{% endif %}
 
-</html>
+		{% include "_partials/_flash.html.twig" %}
+
+		{% block body %}{% endblock %}
+		{% include "_partials/_footer.html.twig" %}
+	</body>
+</html></body></html>
