@@ -6,27 +6,24 @@
 
 {% block body %}
 	<main class="container">
-
 		<section class="row">
-
 			<div class="col-12">
-				<h1>detail de
-					{{ product.name }}</h1>
-
-
+				<h1>{{ product.name }}</h1>
 			</div>
+
 			<div class="col-6">
 				<div id="carouselExampleIndicators" class="carousel slide">
-					<div class="carousel-indicators">
-						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-					</div>
+					{% for iteration in 1.. product.images|length %}
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ iteration - 1}}" {{ (loop.first) ? 'class="active" aria-current="true"' : ''}} aria-label="Slide {{ iteration - 1}}"></button>
+					{% endfor %}
+
 					<div class="carousel-inner">
 						{% for image in product.images %}
-							<div class="carousel-item {{loop.index0 == 0 ? 'active' : ''}}">
-								<img src="{{ asset('assets/uploads/') ~ image.name }}" class="d-block w-100" alt="...">
-							</div>
+							<div class="carousel-item {{(loop.first ) ? 'active' : ''}}">
+								{# <img
+																																src="https://picsum.photos/200/300?random=2" class="d-block w-100 " alt="{{product.name}}"> #}
+								{# <img src="/public/assets/uploads/email.png" class="d-block w-100" alt="..."> #}
+							<img src="{{ asset('assets/uploads/') ~ image.name }}" alt="Symfony!"/> </div>
 						{% endfor %}
 
 
@@ -41,13 +38,21 @@
 					</button>
 				</div>
 			</div>
+
+
 			<div class="col-6">
+
 				<p>{{ product.description }}</p>
 				<p>Catégories :
 					{{ product.categories.name }}</P>
 				<p>Prix :
-					{{ product.price/100}}
+					{{ product.price /100}}
 					€</p>
+				{% if product.stock > 0 %}
+					<a href="#" class="btn btn-success">Ajouter au panier</a>
+				{% else %}
+					<p class="text-danger">Temporairement en rupture</p>
+				{% endif %}
 			</div>
 
 		</section>
