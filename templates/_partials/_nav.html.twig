@@ -14,53 +14,23 @@
 				<li class="nav-item">
 					<a class="nav-link" href="#">Produits</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
-				</li>
-
-
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu déroulant</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Another action</a>
-						<a class="dropdown-item" href="#">Something else here</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Separated link</a>
-					</div>
-				</li>
 			</ul>
-			{# <form class="d-flex">
-									                <input class="form-control me-sm-2" type="search" placeholder="Search">
-									                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-									            </form> #}
-			{# me marge end ms marge start #}
-			{# <ul class="navbar-nav ms-auto">
-									                <li class="nav-item">
-									                    <a href="#" class="nav-link">Mon compte</a>
-									                </li>
-									                <li class="nav-item">
-									                    <a href="#" class="nav-link">Déconnexion</a>
-									                </li>
-									                <li class="nav-item">
-									                    <a href="#" class="nav-link">Me connecter</a>
-									                </li>
-									            </ul> #}
 
-				<ul class="navbar-nav "> {% if app.user %}
+
+			<ul class="navbar-nav ">
+				{% if app.user   %}
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon espace</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="#">Profil</a>
-
 							<a class="dropdown-item" href=" {{ path('app_logout') }} ">Déconexion</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
+							{% if is_granted('ROLE_PRODUCT_ADMIN') %}
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href=" {{ path('admin_index') }} ">ADMINISTRATION</a>
+							{% endif %}
 						</div>
 					</li>
+
 				{% else %}
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon espace</a>
@@ -68,14 +38,10 @@
 							<a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
 							<a class="dropdown-item" href="{{ path('app_register') }}">M'inscrire</a>
 							<a class="dropdown-item" href="{{ path('forgotten_password') }}">Mot de passe oublié</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
 						</div>
 					</li>
-
 				{% endif %}
-
-			</ul>
+			</div>
 		</div>
 	</div>
-</div></nav>
+</nav>

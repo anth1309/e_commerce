@@ -1,0 +1,27 @@
+<main class="container">
+	<section class="row">
+		<div class="col-12 ">
+			{{ form_start(productForm) }}</div>
+		<div class="col-12 my-3">{{ form_row(productForm.name,  { attr: { 'class': 'form-control' }}) }}</div>
+		<div class="col-12 my-3">{{ form_row(productForm.description, { attr: { 'class': 'form-control' }}) }}</div>
+		<div class="col-12 my-3">{{ form_row(productForm.categories, { attr: { 'class': 'form-control' }}) }}</div>
+		<div class="col-12 my-3">{{ form_row(productForm.price, { attr: { 'class': 'form-control' }}) }}</div>
+		<div class="col-12 my-3">{{ form_row(productForm.stock, { attr: { 'class': 'form-control' }}) }}</div>
+
+
+		{# on affiche les images si on est en edition #}
+
+		{% if app.request.attributes.get('_route') == 'admin_products_edit' %}
+			<h2>Images</h2>
+			{% for image in product.images %}
+				<div>
+					<img src="{{ asset('assets/uploads/products/mini/300x300-' ~ image.name ) }}" alt="Image" width="150">
+
+					<a href="{{ path('admin_products_delete_image', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id )}}">Supprimer</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<div class="col-12 my-3">{{ form_row(productForm.images, { attr: { 'class': 'form-control' }}) }}</div>
+		<button type="submit" class="btn btn-primary">{{ button_label|default('AJOUTER') }}</button>
+	</div>
+	{{ form_end(productForm) }}</div></section></main>

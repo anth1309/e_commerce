@@ -1,11 +1,48 @@
 {% extends "base.html.twig" %}
 
-{% block title %}
-	Administration des produits
+{% block title %}Liste des produits
 {% endblock %}
 
 {% block body %}
+	<div class="container">
+		<div class="row">
+			{% include "_partials/_adminnav.html.twig" %}
+			<main class="col-9 border border-light bt-white p-2">
+				<h1>Liste des produits</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Photo</th>
+							<th>Nom</th>
+							<th>Prix</th>
+							<th>Stock</th>
+							<th>Catégorie</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
 
-	<h1>Administration des produits<h1>
+					<tbody>
+						{% for produit in produits %}
+							<tr>
+								<td>{{ produit.id }}</td>
+								<td>
+									<img src="{{ asset('assets/uploads/products/mini/300x300-' ~ produit.images[0].name ) }}" alt="{{ produit.name }}" class="img-thumbnail">
+								</td>
+								{# le nom de la premiere image pour ce produit #}
+								<td>{{ produit.name }}</td>
+								<td>{{ produit.price /100 }}</td>
+								<td>{{ produit.stock }}</td>
+								<td>{{ produit.categories.name }}</td>
+								<td>
+									<a href="{{ path('admin_products_edit', {id: produit.id} ) }}" class="btn btn-outline-warning">Modifier</a>
+								</td>
+							</tr>
 
-		{% endblock %}
+						{% endfor %}
+					</tbody>
+				</table>
+			</main>
+		</div>
+	</div>
+{% endblock %}

@@ -8,26 +8,30 @@
 		<section class="row">
 			<div class="col-12">
 				<h1>Site e-commerce</h1>
-				<p>Bienvenue sur le site de Inconnu</p>
+				<p>Bienvenue sur le site
+					{% if app.user   %}
+						{{ app.user.firstname | title }}
+					{% endif %}
+				</p>
 			</div>
 			{% for category in categories %}
 
-				{% if category.parent ==null %}
+				{% if category.parent == null %}
 					<div class="col-12 mx-3">
 						<h2 class=" my-3 mx-1">{{ category.name }}<h2>
 							{% else %}
-								<div class="col-3">
+								<div class="col-3 ">
 									<div
-										class="card h-200">
+										class="card h-200 ">
 										{# <img class="card-img-top" src="..." alt="Card image cap"> #}
-										<div class="card-body ">
+										<div class="card-body  text-center">
 
-											<h3 class="card-title">
+											<h3 class="card-title text-center">
 												{{ category.name }}
 											</h3>
 
 
-											<a href="{{path('categories_list', {slug: category.slug})}}" class="btn btn-primary">En savoir plus</a>
+											<a href="{{path('categories_list', {slug: category.slug})}}" class="btn btn-primary  ">En savoir plus</a>
 
 										</div>
 									</div>
