@@ -28,7 +28,7 @@
 								<td>{{ user.id }}</td>
 								<td>{{ user.firstname}}</td>
 								<td>{{ user.lastname }}</td>
-								<td>{{ user.email /100 }}</td>
+
 								<td>
 									{% for role in user.roles %}
 										{% if role == "ROLE_ADMIN" %}
@@ -50,9 +50,10 @@
 								</td>
 								<td>
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="switch {{ user.id}} " {{ user.isVerified ? "checked" : ""}} disabled>
-										<label class="form-check-label" for="switch {{ user.id}}"></label>
+										<input class="form-check-input" type="checkbox" role="switch" id="switch {{ user.id}} " {{ user.is_verified ? 'checked' : ''}}>
+										<label class="form-check-label" for="switch {{ user.id }}"></label>
 									</div>
+
 								</td>
 								<td>
 									<a href="#" class="btn btn-outline-warning">Modifier</a>
